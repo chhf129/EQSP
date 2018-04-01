@@ -24,8 +24,11 @@ Mat EQSP::eq_point_set_polar(int dim, int n){
 
 
 int main(){
-	//EQSP temp;
-	//temp.eq_point_set_polar(2, 2);
-
+	EQSP eqsp;
+	
+	Mat c_polar(eqsp.polar_colat(1, 1));
+	eqsp.printMat(c_polar);
+//	Mat temp1(eqsp.polar_colat(1, 1));
+	
 	return 1;
 }
