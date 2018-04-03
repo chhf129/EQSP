@@ -1,4 +1,4 @@
-#include "EQ_partition.h"
+#include "EQSP.h"
 
 Mat EQSP::eq_point_set_polar(int dim, int n){
 //	std::cout << "hello world !" << std::endl;
@@ -13,6 +13,8 @@ Mat EQSP::eq_point_set_polar(int dim, int n){
 		points_s = Mat::zeros(dim, n, matType);
 		return points_s;
 	}
+
+	//TODO
 	int i = 1;
 	int j = 2;
 	//int test1 = eq_caps(i, j);
@@ -23,12 +25,5 @@ Mat EQSP::eq_point_set_polar(int dim, int n){
 }
 
 
-int main(){
-	EQSP eqsp;
-	
-	Mat c_polar(eqsp.polar_colat(1, 1));
-	eqsp.printMat(c_polar);
-//	Mat temp1(eqsp.polar_colat(1, 1));
-	
-	return 1;
-}
+
+
