@@ -10,8 +10,8 @@ void EQSP::printMat(Mat& temp){
 		++it;
 	}
 	*/
-	std::cout << temp  << std::endl;
-	std::system("pause");
+	cout << temp  << endl;
+	system("pause");
 }
 
 void EQSP::matPow(Mat& base, double exp){
@@ -25,7 +25,7 @@ void EQSP::matPow(Mat& base, double exp){
 
 }
 
-std::pair<Mat,Mat> EQSP::eq_caps(int dim, int n){
+pair<Mat,Mat> EQSP::eq_caps(int dim, int n){
 	Mat s_cap, n_regions;
 
 	if (dim == 1){
@@ -58,7 +58,7 @@ std::pair<Mat,Mat> EQSP::eq_caps(int dim, int n){
 		s_cap=cap_colats(dim, n, c_polar, n_regions);
 	}
 
-	return std::make_pair(s_cap,n_regions);
+	return make_pair(s_cap,n_regions);
 
 }
 
@@ -153,7 +153,7 @@ Mat EQSP::sradius_of_cap(int dim, const Mat& area){
 				}
 				else flipped = false;
 				//CAUTION
-				std::pair<double, double> result = boost::math::tools::bisect(
+				pair<double, double> result = boost::math::tools::bisect(
 					[&](double s){ return area_of_cap(dim, createUnitMat(s)).at<double>(0, 0) - ak; }, 0.0, pi, boost::math::tools::eps_tolerance<double>());
 				double sk = (result.first + result.second) / 2;
 				
@@ -196,8 +196,7 @@ Mat EQSP::area_of_cap(int dim, const Mat& s_cap){
 			else{
 				*itA = (*itS*2 - sin(*itS*2))*pi;
 			}
-			//std::cout << *itS;
-			++itA;
+						++itA;
 			++itS;
 		}
 		break;
@@ -229,7 +228,7 @@ Mat EQSP::num_collars(const Mat& n, Mat& c_polar, const Mat& a_ideal){
 
 	while (itNcollar != itend){
 		if (*itN > 2 && *itA > 0){
-			*itNcollar = std::max(1.0, round((pi - *itC *2) / *itA));
+			*itNcollar = max(1.0, round((pi - *itC *2) / *itA));
 		}
 		++itN;
 		++itC;
@@ -288,4 +287,26 @@ Mat EQSP::cap_colats(int dim, int n, double c_polar, const Mat& n_regions){
 		c_caps.at<double>(0, i) = sradius_of_cap(dim, createUnitMat(subtotal_n_regions*ideal_region_area)).at<double>(0, 0);
 	}
 	return c_caps;
+}
+
+
+Mat EQSP::s2_offset(const Mat& points_1){
+	int n_in_collar = points_1.cols;
+	double a_2, a_3;
+	if (n_in_collar>2){
+		if (n_in_collar > 3 && points_1.at<double>(2, 2) == points_1.at<double>(2, 3)){
+			a_3 = (points_1.at<double>(1, 2) + points_1.at<double>(1, 3)) / 2;
+		}
+		else{
+			a_3 = points_1.at<double>(1, 2) + pi;
+		}
+		a_2 = points_1.at<double>(2, 2) / 2;
+	}
+	else{
+		a_3 = 0;
+		a_2 = pi / 2;
+	}
+	Mat rotation;//TODO
+	return rotation;
+
 }

@@ -13,17 +13,21 @@ const double pi = M_PI;
 
 
 using namespace cv;
+using namespace std;
 
 
 class EQSP
 {
 public:
-	Mat eq_point_set_polar(int dim, int n);  //TODO: options
 	EQSP(){};
 	~EQSP(){};
 
+	Mat eq_point_set_polar(int dim, int n);
+	Mat eq_point_set_polar(int dim, int n, bool use_offset, double offset);  //TODO: options
+
+
 	//private:
-	std::pair<Mat, Mat> eq_caps(int dim, int n);
+	pair<Mat, Mat> eq_caps(int dim, int n);
 	void matPow(Mat& base, double exp);
 	void printMat(Mat& temp);
 	Mat polar_colat(int dim, int n);
@@ -38,4 +42,5 @@ public:
 	Mat area_of_collar(int dim, const Mat& a_top, const Mat& a_bot);
 	Mat round_to_naturals(const Mat& r_regions);
 	Mat cap_colats(int dim, int n, double c_polar, const Mat& n_regions);
+	Mat s2_offset(const Mat& points_1);
 };
