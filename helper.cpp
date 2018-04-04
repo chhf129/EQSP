@@ -306,7 +306,56 @@ Mat EQSP::s2_offset(const Mat& points_1){
 		a_3 = 0;
 		a_2 = pi / 2;
 	}
-	Mat rotation;//TODO
+	Mat rotation(rot3(2, -a_2)*rot3(3, -a_3));
 	return rotation;
 
+}
+
+Mat EQSP::rot3(int axis, double angle){
+
+	Mat r;
+	double c = cos(angle);
+	double s = sin(angle);
+	switch (axis){
+	case 1:
+		r = Mat(Matx33d
+			(1, 0, 0,
+			0, c, -s,
+			0, s, c));
+		break;
+	case 2:
+		r = Mat(Matx33d
+			(c, 0, -s,
+			0, 1, 0,
+			s, 0, c));
+		break;
+	case 3:
+		r = Mat(Matx33d
+			(c, -s, 0,
+			s, c, 0,
+			0, 0, 1));
+		break;
+	}
+	return r;
+}
+
+double EQSP::circle_offset(double n_top, double n_bot, bool extra_twist){
+	double offset = (1 / n_bot - 1 / n_top) / 2 + gcd(n_top, n_bot) / (2 * n_top*n_bot);//change gcd return int?
+	
+	if (extra_twist){
+		double twist = 6;
+		offset += offset + twist / n_bot;
+	}
+	
+	return offset;
+}
+
+static double gcd(double u, double v) {
+	double r;
+	while (v != 0) {
+		r = fmod(u, v);
+		u = v;
+		v = r;
+	}
+	return u;
 }

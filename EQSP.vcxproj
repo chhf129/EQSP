@@ -23,6 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EQ_partition.cpp" />
+    <ClCompile Include="EQ_region.cpp" />
     <ClCompile Include="helper.cpp" />
     <ClCompile Include="EQSP.cpp" />
   </ItemGroup>

@@ -24,6 +24,9 @@
     <ClCompile Include="EQSP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EQ_region.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EQSP.h">

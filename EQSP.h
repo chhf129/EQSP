@@ -23,9 +23,9 @@ public:
 	~EQSP(){};
 
 	Mat eq_point_set_polar(int dim, int n);
-	Mat eq_point_set_polar(int dim, int n, bool use_offset, double offset);  //TODO: options
-
-
+	Mat eq_point_set_polar(int dim, int n, bool use_offset, double offset);  
+	pair<Mat, vector<Mat>> eq_regions(int dim, int n);
+	pair<Mat, vector<Mat>> eq_regions(int dim, int n, bool use_offset, double offset);
 	//private:
 	pair<Mat, Mat> eq_caps(int dim, int n);
 	void matPow(Mat& base, double exp);
@@ -43,4 +43,8 @@ public:
 	Mat round_to_naturals(const Mat& r_regions);
 	Mat cap_colats(int dim, int n, double c_polar, const Mat& n_regions);
 	Mat s2_offset(const Mat& points_1);
+	Mat rot3(int axis, double angle);
+	double circle_offset(double n_top, double n_bot, bool extra_twist);
 };
+
+static double gcd(double u, double v);
